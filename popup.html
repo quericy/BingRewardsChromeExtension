@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" ng-controller="MasterCtrl" ng-csp>
+
+<head>
+    <meta charset="utf-8">
+    <title ng-bind="'options_title' | tr">TaoKeTask Options</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <style type="text/css">
+        /* body */
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            min-height: 100%;
+            font-family: "SF UI Display", ".PingFang SC", "PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Helvetica", "Hiragino Sans GB", sans-serif;
+        }
+        
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        
+        .side-nav {
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        
+        .side-nav .nav-pills > li {
+            min-width: 150px;
+        }
+        
+        li > a .glyphicon {
+            margin-right: 6px;
+        }
+        
+        .nav-header {
+            display: block;
+            padding: 3px 15px;
+            font-size: 11px;
+            font-weight: bold;
+            line-height: 20px;
+            color: #999;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+        }
+        
+        .divider {
+            height: 1px;
+            overflow: hidden;
+            background-color: #E5E5E5;
+        }
+        
+        @media (max-width: 767px) {
+            .side-nav {
+                position: static;
+                height: auto;
+                height: initial;
+            }
+        }
+        
+        .side-nav .nav-pills > li > a {
+            padding: 8px 15px;
+        }
+        
+        @media (max-height: 767px) {
+            .side-nav .nav-pills > li > a {
+                padding: 5px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body style="display: block;">
+    <div class="container-fluid">
+        <header class="col-lg-2 col-sm-3 side-nav">
+            <nav class="nav nav-pills nav-stacked">
+                <li class="nav-header">必应点数获取</li>
+                <li><a href="https://www.bing.com/rewards/dashboard" target="_blank"><span class="glyphicon glyphicon-file"></span>访问必应面板</a></li>
+                <li><a href="history.html" target="_blank"><span class="glyphicon glyphicon-time"></span>历史记录</a></li>
+                <li class="divider"></li>
+                <li><a href="options.html" target="_blank"><span class="glyphicon glyphicon-wrench"></span>扩展设置</a></li>
+            </nav>
+        </header>
+    </div>
+    <script src="js/jquery191.js"></script>
+    <script src="js/common.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+
+  "name": "BingRewardsAutoGet",
+  "description": "自动获取必应奖励点数",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",    
+    "notifications",
+    "*://*.bing.com/*"
+  ],
+  "background": {
+    "scripts": [  
+      "js/jquery191.js",    
+      "js/common.js",      
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+        {
+            "matches": ["*://www.bing.com/"],
+            "js": ["js/jquery191.js","js/common.js","js/auto_search.js"]
+        }
+    ],
+  "icons": {
+    "48": "images/icon.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "自动获取必应点数",
+    "default_popup": "popup.html"
+  }
+}

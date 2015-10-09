@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-controller="MasterCtrl" ng-csp>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <title>历史记录-BingRewardsAutoGet</title>
+    <style type="text/css">
+        body {
+            font-family: "SF UI Display", ".PingFang SC", "PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Helvetica", "Hiragino Sans GB", sans-serif;
+        }
+        
+        label {
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h4 style="color: #999;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);">
+                <b>BingRewardsAutoGet</b>
+            </h4>
+        </div>
+        <div id="header_tips" class="row">
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-time"></span> &nbsp;&nbsp;历史记录(最近1000条)
+                    <div id="clear_history_btn" class=" btn btn-sm btn-default">清空记录</div>
+                </div>
+                <div id="history-content" class="panel-body">
+                    <!--历史内容-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery191.js"></script>
+    <script src="js/common.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

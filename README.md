@@ -1,0 +1,2 @@
+# BingRewardsChromeExtension
+一个自动领取必应奖励的chrome扩展

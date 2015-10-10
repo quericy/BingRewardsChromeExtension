@@ -14,7 +14,18 @@
 //=======后台消息监听Begin=======
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     switch (message.act) {
-        case ''://                 
+        case 'run_auto_search'://执行手动触发自动搜索
+            var date_time = new Date();
+            var dateTimeStr = date_time.getFullYear() + "-" + (date_time.getMonth() + 1) + "-" + date_time.getDate();
+            auto_search(dateTimeStr,1500);
+            break;
+        case 'stop_auto_search'://终止手动触发自动搜索
+            chrome.storage.local.get(['search_thread_id'], function (storage) {
+                var search_thread_id = storage.search_thread_id;
+                if (search_thread_id != null) {
+                    clearInterval(search_thread_id);//kill已有定时搜索任务
+                }
+            });
             break;
         default:
             sendResponse('error_action');
@@ -65,19 +76,19 @@ function everyday_search_check() {
             return;//关闭自动搜索
         }
         var last_search_time = storage.last_search_time;//最近一次自动搜索时间
-        var search_start_time=storage.search_start_time;//搜索起始小时
-        var search_time_step=storage.search_time_step;//搜索执行间隔
-        search_start_time==null?10:search_start_time;
-        search_time_step==null?1500:search_time_step;
+        var search_start_time = storage.search_start_time;//搜索起始小时
+        var search_time_step = storage.search_time_step;//搜索执行间隔
+        search_start_time == null ? 10 : search_start_time;
+        search_time_step == null ? 1500 : search_time_step;
         var date_time = new Date();
-        var now_hour=date_time.getHours();
-        if(now_hour<search_start_time){
+        var now_hour = date_time.getHours();
+        if (now_hour < search_start_time) {
             return;//还没到时间
         }
         var dateTimeStr = date_time.getFullYear() + "-" + (date_time.getMonth() + 1) + "-" + date_time.getDate();
         if (last_search_time == null || last_search_time != dateTimeStr) {
             chrome.storage.local.set({ 'last_search_time': dateTimeStr }, function () {
-                auto_search(dateTimeStr,search_time_step);
+                auto_search(dateTimeStr, search_time_step);
             });
         }
     })
@@ -86,11 +97,28 @@ function everyday_search_check() {
 /**
  * 每日自动搜索执行函数
  */
-function auto_search(dateTimeStr,search_time_step) {
+function auto_search(dateTimeStr, search_time_step) {
+
+    chrome.storage.local.get(['search_thread_id'], function (storage) {
+        var search_thread_id = storage.search_thread_id;
+        if (search_thread_id != null) {
+            clearInterval(search_thread_id);//kill已有定时搜索任务
+        }
+        var set_interval_id = search_thread(dateTimeStr, search_time_step);
+        //记录定时搜索任务ID
+        chrome.storage.local.set({ 'search_thread_id': set_interval_id });
+    });
+}
+
+function search_thread(dateTimeStr, search_time_step) {
+    //创建定时搜索任务
     var search_count = 0;
     var set_interval_id = setInterval(function () {
         if (search_count > 50) {
-            clearInterval(set_interval_id);
+            //执行完成,清除定时搜索任务
+            chrome.storage.local.set({ 'search_thread_id': null }, function () {
+                clearInterval(set_interval_id);
+            });
             return;
         }
         var search_text = 'Lumia+' + dateTimeStr + '+' + search_count;
@@ -101,6 +129,7 @@ function auto_search(dateTimeStr,search_time_step) {
         }
         search_count++;
     }, search_time_step);
+    return set_interval_id;
 }
 
 /**

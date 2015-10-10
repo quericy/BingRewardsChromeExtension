@@ -6,6 +6,9 @@
   "version": "1.0.0",
   "permissions": [
     "storage",    
+    "alarms",
+    "webRequest",
+    "webRequestBlocking",    
     "notifications",
     "*://*.bing.com/*"
   ],

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link href="lib/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet">
     <title>设置-BingRewardsAutoGet</title>
     <style type="text/css">
         body {
@@ -30,9 +31,27 @@
                     <span class="glyphicon glyphicon-wrench"></span> &nbsp;&nbsp;扩展设置
                 </div>
                 <div class="panel-body">
-                                     
+                    <h4>自动搜索设置</h4>
+                    <label for="search_status">是否开启自动搜索:</label>
+                    <div>
+                        <input id="search_status" name="my-checkbox" type="checkbox" checked data-on-text="开" data-off-text="关" data-off-color="danger">
+                    </div>
                     <br>
-                    <button id="save_btn" type="button" class="btn btn-success">保存</button>
+                    <label for="search_start_time">自动搜索开始时间:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">每天</span>
+                        <input id="search_start_time" type="text" class="form-control" placeholder="范围:(0 - 23),默认10">
+                        <span class="input-group-addon">时</span>
+                    </div>
+                    <br>
+                    <label for="search_time_step">搜索间隔时间:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                        <input id="search_time_step" type="text" class="form-control" placeholder="默认1500毫秒（1.5秒）,最小500毫秒（0.5秒）,请根据必应访问速度自行设置">
+                        <span class="input-group-addon">毫秒</span>
+                    </div>
+                    <br>
+                    <button id="save_btn" type="button" class="btn btn-primary">保存</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <button id="reload_btn" type="button" class="btn btn-default">放弃</button>
                 </div>
@@ -40,8 +59,11 @@
         </div>
     </div>
     <script src="js/jquery191.js"></script>
-    <script src="js/common.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/options.js"></script>
+
 </body>
 
 </html>

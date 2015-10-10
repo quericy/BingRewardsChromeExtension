@@ -60,13 +60,24 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function (details) {
  * 每日自动搜索检测函数
  */
 function everyday_search_check() {
-    chrome.storage.local.get(["last_search_time3"], function (storage) {
-        var last_search_time = storage.last_search_time3;//最近一次自动搜索时间
-        var dateTime = new Date();
-        var dateTimeStr = dateTime.getFullYear() + "-" + (dateTime.getMonth() + 1) + "-" + dateTime.getDate();
+    chrome.storage.local.get(['last_search_time', 'search_status', 'search_start_time', 'search_time_step'], function (storage) {
+        if (storage.search_status != null && storage.search_status != 1) {
+            return;//关闭自动搜索
+        }
+        var last_search_time = storage.last_search_time;//最近一次自动搜索时间
+        var search_start_time=storage.search_start_time;//搜索起始小时
+        var search_time_step=storage.search_time_step;//搜索执行间隔
+        search_start_time==null?10:search_start_time;
+        search_time_step==null?1500:search_time_step;
+        var date_time = new Date();
+        var now_hour=date_time.getHours();
+        if(now_hour<search_start_time){
+            return;//还没到时间
+        }
+        var dateTimeStr = date_time.getFullYear() + "-" + (date_time.getMonth() + 1) + "-" + date_time.getDate();
         if (last_search_time == null || last_search_time != dateTimeStr) {
-            chrome.storage.local.set({ 'last_search_time3': dateTimeStr }, function () {
-                auto_search(dateTimeStr);
+            chrome.storage.local.set({ 'last_search_time': dateTimeStr }, function () {
+                auto_search(dateTimeStr,search_time_step);
             });
         }
     })
@@ -75,7 +86,7 @@ function everyday_search_check() {
 /**
  * 每日自动搜索执行函数
  */
-function auto_search(dateTimeStr) {
+function auto_search(dateTimeStr,search_time_step) {
     var search_count = 0;
     var set_interval_id = setInterval(function () {
         if (search_count > 50) {
@@ -89,7 +100,7 @@ function auto_search(dateTimeStr) {
             open_search_tab(1, search_text);
         }
         search_count++;
-    }, 1500);
+    }, search_time_step);
 }
 
 /**

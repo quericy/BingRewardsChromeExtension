@@ -10,7 +10,7 @@
 $(function () {
     chrome.storage.local.get(['search_thread_id'], function (storage) {
 		var search_thread_id = storage.search_thread_id;
-		if (search_thread_id == null) {
+		if (search_thread_id == null||search_thread_id == undefined) {
 			$('#search_pannel').html('<a id="run_auto_search" href="#"><span class="glyphicon glyphicon-hand-up"></span>手动执行搜索</a>');
 		} else {
 			$('#search_pannel').html('<a id="stop_auto_search" href="#"><span class="glyphicon glyphicon-minus-sign"></span>停止自动搜索</a>');
@@ -21,14 +21,14 @@ $(function () {
 
 $(document).delegate('#run_auto_search', 'click', function () {
 	chrome.runtime.sendMessage({ act: 'run_auto_search' }, function (result) {
-		
+		window.close();
 	});
 });
 
 
 $(document).delegate('#stop_auto_search', 'click', function () {
 	chrome.runtime.sendMessage({ act: 'stop_auto_search' }, function (result) {
-		
+		window.close();
 	});
 });
 //=======页面执行End=======
